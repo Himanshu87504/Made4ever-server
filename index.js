@@ -8,17 +8,21 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+// Allowed origins from environment variables
 const allowedOrigins = [
-    "https://made4ever-server.onrender.com",
-    "http://localhost:3000"
+    process.env.FRONTEND_URL, // Vercel frontend
+    process.env.LOCAL_URL     // Local dev
 ];
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
+        if (!origin) return callback(null, true); // allow Postman/server requests
+
+        if (!allowedOrigins.includes(origin)) {
+            console.log("Blocked CORS request from:", origin);
             return callback(new Error("Not allowed by CORS"), false);
         }
+
         return callback(null, true);
     },
     credentials: true
