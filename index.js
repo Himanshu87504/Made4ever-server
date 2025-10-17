@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: "https://made4ever-server.onrender.com/",
+    origin: "https://made4ever-server.onrender.com",
     credentials: true,
 }));
 
