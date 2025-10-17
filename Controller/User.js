@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
 
         const otp = Math.floor(100000 + Math.random() * 900000);
         // await sendMail(email, "Verify otp", otp);
-        alert("otp", otp);
+        // alert("otp", otp);
 
 
         const activationToken = jwt.sign(
@@ -38,6 +38,7 @@ export const signup = async (req, res) => {
         res.status(200).json({
             message: "OTP sent to your email",
             activationToken,
+            otp: otp
         });
     } catch (err) {
         console.error(err);
@@ -135,11 +136,12 @@ export const requestOtpLogin = async (req, res) => {
         });
 
         // await sendMail(email, "otp-login", otp);
-        alert("otp", otp);
+        // alert("otp", otp);
 
         res.status(200).json({
             message: "OTP sent to your email (for now check console)",
             loginToken,
+            otp: otp
         });
     } catch (err) {
         console.error(err);
@@ -182,7 +184,7 @@ export const forgotPasswordRequest = async (req, res) => {
 
         const otp = Math.floor(100000 + Math.random() * 900000);
         // await sendMail(email, "Forgot-password", otp);
-        alert("otp", otp);
+        // alert("otp", otp);
         const resetToken = jwt.sign({ userId: user._id, otp }, process.env.Activation_Secret, {
             expiresIn: "5m",
         });
@@ -190,6 +192,7 @@ export const forgotPasswordRequest = async (req, res) => {
         res.status(200).json({
             message: "OTP sent to your email",
             resetToken,
+            otp: otp
         });
     } catch (err) {
         console.error(err);
