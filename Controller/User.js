@@ -25,8 +25,9 @@ export const signup = async (req, res) => {
         const userData = { name, username, email, password: hashPassword };
 
         const otp = Math.floor(100000 + Math.random() * 900000);
-        await sendMail(email, "Verify otp", otp);
-        console.log("Signup OTP:", otp);
+        // await sendMail(email, "Verify otp", otp);
+        alert("otp", otp);
+
 
         const activationToken = jwt.sign(
             { userData, otp },
@@ -133,7 +134,8 @@ export const requestOtpLogin = async (req, res) => {
             expiresIn: "5m",
         });
 
-        await sendMail(email, "otp-login", otp);
+        // await sendMail(email, "otp-login", otp);
+        alert("otp", otp);
 
         res.status(200).json({
             message: "OTP sent to your email (for now check console)",
@@ -179,8 +181,8 @@ export const forgotPasswordRequest = async (req, res) => {
         if (!user) return res.status(400).json({ message: "User not found" });
 
         const otp = Math.floor(100000 + Math.random() * 900000);
-        await sendMail(email, "Forgot-password", otp);
-
+        // await sendMail(email, "Forgot-password", otp);
+        alert("otp", otp);
         const resetToken = jwt.sign({ userId: user._id, otp }, process.env.Activation_Secret, {
             expiresIn: "5m",
         });
