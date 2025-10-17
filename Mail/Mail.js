@@ -1,18 +1,17 @@
 import { createTransport } from "nodemailer";
 
-// Send OTP email
+
 export const sendMail = async (email, subject, otp) => {
     try {
         console.log("Sending mail...");
 
-        // Create transporter
         const transport = createTransport({
             host: "smtp.gmail.com",
-            port: 465,
+            port: 587,
             secure: true, // use SSL
             auth: {
-                user: process.env.GMAIL,    // your Gmail address
-                pass: process.env.PASSWORD, // app password (not your normal Gmail password)
+                user: process.env.GMAIL,
+                pass: process.env.PASSWORD,
             },
         });
 
@@ -32,7 +31,6 @@ export const sendMail = async (email, subject, otp) => {
       `,
         };
 
-        // Send email
         const info = await transport.sendMail(mailOptions);
         console.log("Email sent: ", info.messageId);
 
