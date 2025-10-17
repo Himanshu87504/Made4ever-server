@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-    "https://login-page2-bay.vercel.app",
+    "https://made4ever-server.onrender.com/",
     "http://localhost:3000"
 ];
 
