@@ -8,15 +8,14 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// Allowed origins array with only frontend URL from environment
 const allowedOrigins = [
     process.env.FRONTEND_URL
 ];
 
-// CORS options to check origin dynamically
+
 const corsOptions = {
     origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl)
+
         if (!origin) return callback(null, true);
 
         if (!allowedOrigins.includes(origin)) {
@@ -26,14 +25,13 @@ const corsOptions = {
         return callback(null, true);
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
-// Enable CORS with the options
+
 app.use(cors(corsOptions));
 
-// Handle preflight OPTIONS requests for all routes
-app.options("*", cors(corsOptions));
+
 
 app.get("/", (req, res) => {
     console.log("Hello, I am Himanshu");
