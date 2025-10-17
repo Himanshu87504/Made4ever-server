@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-    "https://made4ever-server.onrender.com/",
+    "https://made4ever-server.onrender.com",
     "http://localhost:3000"
 ];
 
