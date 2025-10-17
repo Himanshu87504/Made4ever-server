@@ -8,28 +8,10 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = [
-    process.env.FRONTEND_URL
-];
-
-
-const corsOptions = {
-    origin: function (origin, callback) {
-
-        if (!origin) return callback(null, true);
-
-        if (!allowedOrigins.includes(origin)) {
-            console.log("Blocked CORS request from:", origin);
-            return callback(new Error("Not allowed by CORS"));
-        }
-        return callback(null, true);
-    },
+app.use(cors({
+    origin: "https://login-page2-bay.vercel.app",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-};
-
-
-app.use(cors(corsOptions));
+}));
 
 
 
