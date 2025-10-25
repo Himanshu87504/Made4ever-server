@@ -7,7 +7,9 @@ import {
     verifyOtpLogin,
     forgotPasswordRequest,
     resetPassword,
+    me,
 } from "../Controller/User.js";
+import { isAuth } from "../middleware/isAuth.js";
 
 const router = express.Router();
 
@@ -18,5 +20,6 @@ router.post("/request-otp-login", requestOtpLogin);
 router.post("/verify-otp-login", verifyOtpLogin);
 router.post("/forgot-password", forgotPasswordRequest);
 router.post("/reset-password", resetPassword);
+router.get("/me", isAuth, me);
 
 export default router;

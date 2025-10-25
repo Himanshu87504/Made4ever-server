@@ -2,7 +2,7 @@ import User from "../Models/User.js";
 import { signupSchema, Loginvalidation } from "./validationSchemas.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { sendMail } from "../Mail/Mail.js";
+// import { sendMail } from "../Mail/Mail.js";
 
 // ====================== SIGNUP (STEP 1) ======================
 export const signup = async (req, res) => {
@@ -84,6 +84,7 @@ export const verifyUser = async (req, res) => {
 
 // ====================== NORMAL LOGIN ======================
 export const login = async (req, res) => {
+    console.log("hello");
     try {
         const { error } = Loginvalidation.validate(req.body, { abortEarly: false });
         if (error) {
@@ -139,7 +140,7 @@ export const requestOtpLogin = async (req, res) => {
         // alert("otp", otp);
 
         res.status(200).json({
-            message: "OTP sent to your email (for now check console)",
+            message: "OTP sent to your email",
             loginToken,
             otp: otp
         });
@@ -227,3 +228,9 @@ export const resetPassword = async (req, res) => {
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };
+
+export const me = async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    res.json({ user });
+}
